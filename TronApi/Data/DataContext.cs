@@ -7,5 +7,7 @@ namespace TronApi.Data
         public DataContext(DbContextOptions<DataContext> options) : base (options) { }
 
         public DbSet<SuperHero> SuperHeroes { get; set; }
+
+        public DbSet<UserAccount> userAccounts { get; set; }
     }
 }
