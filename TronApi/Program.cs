@@ -1,8 +1,19 @@
 global using TronApi.Data;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Cors;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
+//{
+//    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    
+//}));
 
 // Add services to the container.
 
@@ -15,6 +26,15 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,8 +46,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
 
 app.Run();

@@ -11,8 +11,8 @@ using TronApi.Data;
 namespace TronApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220814205008_CreateInitial")]
-    partial class CreateInitial
+    [Migration("20220823103333_Wednesday")]
+    partial class Wednesday
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,27 @@ namespace TronApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SuperHeroes");
+                });
+
+            modelBuilder.Entity("TronApi.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
