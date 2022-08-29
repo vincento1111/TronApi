@@ -8,6 +8,6 @@ namespace TronApi.Data
 
         public DbSet<SuperHero> SuperHeroes { get; set; }
 
-        public DbSet<UserAccount> userAccounts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
