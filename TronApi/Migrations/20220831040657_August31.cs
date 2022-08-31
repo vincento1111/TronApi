@@ -4,7 +4,7 @@
 
 namespace TronApi.Migrations
 {
-    public partial class Wednesday : Migration
+    public partial class August31 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,27 @@ namespace TronApi.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "UsersStats",
+                columns: table => new
+                {
+                    StatId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Userid = table.Column<int>(type: "int", nullable: false),
+                    Strength = table.Column<int>(type: "int", nullable: false),
+                    Defense = table.Column<int>(type: "int", nullable: false),
+                    Speed = table.Column<int>(type: "int", nullable: false),
+                    Dexterity = table.Column<int>(type: "int", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    Experience = table.Column<int>(type: "int", nullable: false),
+                    Life = table.Column<int>(type: "int", nullable: false),
+                    Money = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersStats", x => x.StatId);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -46,6 +67,9 @@ namespace TronApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "UsersStats");
         }
     }
 }

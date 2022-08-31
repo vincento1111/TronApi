@@ -11,8 +11,8 @@ using TronApi.Data;
 namespace TronApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220823103333_Wednesday")]
-    partial class Wednesday
+    [Migration("20220831040657_August31")]
+    partial class August31
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,46 @@ namespace TronApi.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TronApi.UserStats", b =>
+                {
+                    b.Property<int>("StatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatId"), 1L, 1);
+
+                    b.Property<int>("Defense")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dexterity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Life")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Money")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Speed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Strength")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("StatId");
+
+                    b.ToTable("UsersStats");
                 });
 #pragma warning restore 612, 618
         }
