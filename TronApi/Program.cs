@@ -4,16 +4,8 @@ global using Microsoft.AspNetCore.Cors;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
-
-//builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
-//{
-//    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-    
-//}));
 
 // Add services to the container.
 

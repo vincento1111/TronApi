@@ -58,6 +58,10 @@ namespace TronApi.Controllers
             _context.Users.Add(userAccount);
             await _context.SaveChangesAsync();
 
+            UserStats userStats = new UserStats(userAccount.UserId);
+            _context.UsersStats.Add(userStats);
+            await _context.SaveChangesAsync();
+
             return Ok(await _context.Users.ToListAsync());
         }
 
