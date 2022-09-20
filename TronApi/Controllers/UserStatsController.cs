@@ -46,15 +46,37 @@ namespace TronApi.Controllers
             var dbStats = await _context.UsersStats.FindAsync(Request.StatId);
             if (dbStats == null)
                 return NotFound("stats not found");
-
-            dbStats.Strength = Request.Strength;
-            dbStats.Defense = Request.Defense;
-            dbStats.Speed = Request.Speed;
-            dbStats.Dexterity = Request.Dexterity;
-            dbStats.Experience = Request.Experience;
-            dbStats.Life = Request.Life;
-            dbStats.Money = Request.Money;
-
+            if(Request.Strength != 0)
+            {
+                dbStats.Strength = Request.Strength;
+            }if(Request.Defense != 0)
+            {
+                dbStats.Defense = Request.Defense;
+            }
+            if(Request.Speed != 0)
+            {
+                dbStats.Speed = Request.Speed;
+            }
+            if (Request.Dexterity != 0)
+            {
+                dbStats.Dexterity = Request.Dexterity;
+            }
+            if (Request.Experience != 0)
+            {
+                dbStats.Experience = Request.Experience;
+            }
+            if (Request.Life != 0)
+            {
+                dbStats.Life = Request.Life;
+            }
+            if (Request.Money != 0)
+            {
+                dbStats.Money = Request.Money;
+            }
+            if (Request.Level != 0)
+            {
+                dbStats.Level = Request.Level;
+            }
             await _context.SaveChangesAsync();
 
             return Ok(await _context.UsersStats.ToListAsync());

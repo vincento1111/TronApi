@@ -37,7 +37,7 @@ namespace TronApi.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetLogin(string email, string password)
         {
 
-            var userEmail = await _context.Users.Where(u => u.Email == email).ToListAsync();
+            //var userEmail = await _context.Users.Where(u => u.Email == email).ToListAsync();
 
             var temp = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
@@ -52,6 +52,17 @@ namespace TronApi.Controllers
             //else return Ok(temp);
         }
 
+        [HttpGet("id")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUserId(string email)
+        {
+            var _user = await _context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+            if (_user == null)
+            {
+                return BadRequest();
+            }
+            else return Ok(_user.UserId);
+        }
+
         [HttpPost]
         public async Task<ActionResult<List<User>>> AddUserAccount(User userAccount)
         {
@@ -60,6 +71,9 @@ namespace TronApi.Controllers
 
             UserStats userStats = new UserStats(userAccount.UserId);
             _context.UsersStats.Add(userStats);
+            await _context.SaveChangesAsync();
+            Profile profiles = new Profile(userAccount.UserId);
+            _context.Profiles.Add(profiles);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Users.ToListAsync());
