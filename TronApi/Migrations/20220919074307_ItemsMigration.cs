@@ -4,10 +4,39 @@
 
 namespace TronApi.Migrations
 {
-    public partial class August31 : Migration
+    public partial class ItemsMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "MasterItemsTables",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ItemDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OffensiveStat = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MasterItemsTables", x => x.ItemId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Profiles",
+                columns: table => new
+                {
+                    ProfileId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ProfileDes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profiles", x => x.ProfileId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "SuperHeroes",
                 columns: table => new
@@ -44,7 +73,7 @@ namespace TronApi.Migrations
                 {
                     StatId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Userid = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Strength = table.Column<int>(type: "int", nullable: false),
                     Defense = table.Column<int>(type: "int", nullable: false),
                     Speed = table.Column<int>(type: "int", nullable: false),
@@ -62,6 +91,12 @@ namespace TronApi.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "MasterItemsTables");
+
+            migrationBuilder.DropTable(
+                name: "Profiles");
+
             migrationBuilder.DropTable(
                 name: "SuperHeroes");
 
