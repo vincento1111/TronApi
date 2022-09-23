@@ -11,8 +11,8 @@ using TronApi.Data;
 namespace TronApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220919074307_ItemsMigration")]
-    partial class ItemsMigration
+    [Migration("20220921065847_CreatedValue")]
+    partial class CreatedValue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,9 @@ namespace TronApi.Migrations
 
                     b.Property<double>("OffensiveStat")
                         .HasColumnType("float");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
 
                     b.HasKey("ItemId");
 
@@ -115,6 +118,25 @@ namespace TronApi.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TronApi.UserInventory", b =>
+                {
+                    b.Property<int>("InventoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryId"), 1L, 1);
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InventoryId");
+
+                    b.ToTable("UserInventories");
                 });
 
             modelBuilder.Entity("TronApi.UserStats", b =>

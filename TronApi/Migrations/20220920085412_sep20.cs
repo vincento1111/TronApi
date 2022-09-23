@@ -4,7 +4,7 @@
 
 namespace TronApi.Migrations
 {
-    public partial class ItemsMigration : Migration
+    public partial class sep20 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,6 +54,20 @@ namespace TronApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserInventories",
+                columns: table => new
+                {
+                    InventoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserInventories", x => x.InventoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -99,6 +113,9 @@ namespace TronApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "SuperHeroes");
+
+            migrationBuilder.DropTable(
+                name: "UserInventories");
 
             migrationBuilder.DropTable(
                 name: "Users");

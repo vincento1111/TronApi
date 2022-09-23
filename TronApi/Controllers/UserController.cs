@@ -60,6 +60,7 @@ namespace TronApi.Controllers
             {
                 return BadRequest();
             }
+            
             else return Ok(_user.UserId);
         }
 
@@ -72,6 +73,7 @@ namespace TronApi.Controllers
             UserStats userStats = new UserStats(userAccount.UserId);
             _context.UsersStats.Add(userStats);
             await _context.SaveChangesAsync();
+
             Profile profiles = new Profile(userAccount.UserId);
             _context.Profiles.Add(profiles);
             await _context.SaveChangesAsync();
