@@ -50,6 +50,7 @@ namespace TronApi.Controllers
             dbItem.ItemName = Request.ItemName;
             dbItem.ItemDescription = Request.ItemDescription;
             dbItem.OffensiveStat = Request.OffensiveStat;
+            dbItem.Value = Request.Value;
 
             await _context.SaveChangesAsync();
 

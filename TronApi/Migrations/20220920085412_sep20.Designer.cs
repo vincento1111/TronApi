@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TronApi.Data;
 
@@ -10,9 +11,10 @@ using TronApi.Data;
 namespace TronApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220920085412_sep20")]
+    partial class sep20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +42,6 @@ namespace TronApi.Migrations
                     b.Property<double>("OffensiveStat")
                         .HasColumnType("float");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
                     b.HasKey("ItemId");
 
                     b.ToTable("MasterItemsTables");
@@ -66,6 +65,35 @@ namespace TronApi.Migrations
                     b.HasKey("ProfileId");
 
                     b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("TronApi.SuperHero", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SuperHeroes");
                 });
 
             modelBuilder.Entity("TronApi.User", b =>
